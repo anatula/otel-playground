@@ -1,0 +1,40 @@
+services:
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:latest
+    command: ["--config=/etc/otel-collector-config.yaml"]
+    volumes:
+      - ./otel-collector-config.yaml:/etc/otel-collector-config.yaml
+      - ./test-logs:/etc/test-logs
+    ports:
+      - "4317:4317"
+      - "4327:4327"
+
+  grafana:
+    image: grafana/grafana:latest
+    depends_on:
+      - loki
+      - tempo
+      - otel-collector
+    ports:
+      - 33000:33000
+    environment:
+      - GF_SERVER_HTTP_PORT=33000
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+      - GF_AUTH_DISABLE_LOGIN_FORM=true
+    volumes:
+      - ./grafana.datasource.yaml:/etc/grafana/provisioning/datasources/datasources.yaml
+
+  tempo:
+    image: grafana/tempo:latest
+    command: ["-config.file=/etc/tempo.yaml"]
+    volumes:
+      - ./tempo.config.yaml:/etc/tempo.yaml
+
+  loki:
+    image: grafana/loki:latest
+    command: -config.file=/etc/loki/config.yaml
+    volumes:
+      - ./loki.config.yaml:/etc/loki/config.yaml
+    ports:
+      - "3900:3900"
