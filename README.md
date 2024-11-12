@@ -1,5 +1,7 @@
-Loki natively supports ingesting OpenTelemetry logs over HTTP. For ingesting logs to Loki using the OpenTelemetry Collector, you must use the otlphttp exporter.
------
+https://grafana.com/docs/loki/latest/reference/loki-http-api/#ingest-logs-using-otlp
+
+## Loki natively supports ingesting OpenTelemetry logs over HTTP. For ingesting logs to Loki using the OpenTelemetry Collector, you must use the otlphttp exporter.
+
 Protocol Buffers are a language and platform-neutral mechanism for serializing and deserializing structured data. Google, its creator, proclaims them to be much faster, smaller, and simpler than other types of payloads, such as XML and JSON.
 
 Protobuf uses a .proto file to define the structure of our data. Each file describes the data that might be transferred from one node to another, or stored in data sources. Once the schema is defined, we’ll use the Protobuf compiler (protoc) to generate source code in various languages:
