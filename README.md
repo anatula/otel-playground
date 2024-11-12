@@ -1,3 +1,7 @@
+Use .NET Aspire dashboard
+
+docker run --rm -it -p 18888:18888 -p 4317:18889 -d --name aspire-dashboard mcr.microsoft.com/dotnet/aspire-dashboard:9.0
+
 https://grafana.com/docs/loki/latest/reference/loki-http-api/#ingest-logs-using-otlp
 
 ## Loki natively supports ingesting OpenTelemetry logs over HTTP. For ingesting logs to Loki using the OpenTelemetry Collector, you must use the otlphttp exporter.
