@@ -11,7 +11,7 @@ const transport = pino.transport({
 const logger = pino(transport);
 
 async function firstHandler(req, res) {
-  logger.info("heyyy 33!!");
+  logger.info("hey from /first!!");
   return res.sendStatus(200);
 }
 
