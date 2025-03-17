@@ -22,6 +22,7 @@ Besides signal architecture, the spec also covers
 ### API and SDK
 Separation the API from the SDK: the API is designed to be lightweight and safe to depend on. The signal’s implementation provided by the SDK is significantly more complex and likely contains dependencies on other software, so registering a provider during the initial setup allows users to resolve dependency conflicts by choosing a different implementation.
 
+![](images/otel-signals-instrumentation.png)
 
 ## Instrumentation
 To add instrumentation to the source code:
@@ -45,6 +46,8 @@ A [span](https://opentelemetry.io/docs/concepts/signals/traces/#spans) represent
 - The start_time and end_time timestamps mark the beginning and end of the span’s duration.
 
 Additionally, spans can contain attributes that provide further context, such as HTTP methods or response status codes, and a resource field that describes the service and environment. Other fields like events, links, and status offer additional details about the span’s lifecycle, outcome and context.
+
+![](./images/manual-instrumentation-traces.png)
 
 #### Configure the Tracing Pipeline and Obtain a Tracer
 
@@ -203,6 +206,8 @@ Since logs provide additional metadata, all the collected telemetry data can be 
 The structure of OpenTelemetry logs, with special attention to how `trace` and `span IDs` are included in log entries for better correlation between logs and traces.
 
 ### Collector
+
+![](./images/collector.png)
 
 Binary written in Go, that runs as a separate, standalone process. It provides a flexible, configurable, and vendor-agnostic system to process telemetry outside the application. It is essentially a broker between a telemetry source and the backend storing the data.
 
